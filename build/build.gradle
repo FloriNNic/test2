@@ -1,9 +1,9 @@
 task initValidation() {
     doFirst {
-        if (!new File("${projectDir}/extracted/oxygen/").exists()) {
+            println "Download start. "
             ant.get(src: 'https://www.oxygenxml.com/InstData/Editor/Linux64/VM/oxygen-64bit-openjdk.sh', dest: "${projectDir}/oxygen-64bit-openjdk.sh", skipexisting: 'true')
             println "Download complete. "
-        }
+        
     }
 
     project.exec {
