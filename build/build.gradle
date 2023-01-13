@@ -3,20 +3,17 @@ task initValidation() {
             println "Download start. "
             ant.get(src: 'https://www.oxygenxml.com/InstData/Editor/Linux64/VM/oxygen-64bit-openjdk.sh', dest: "${projectDir}/oxygen-64bit-openjdk.sh", skipexisting: 'true')
             println "Download complete. "
-        
 
-    project.exec {
-            workingDir "${projectDir}"
-            commandLine 'sh', './oxygen-64bit-openjdk.sh'
-    }        
-    
-    project.exec {
-            workingDir "${projectDir}"
-            commandLine 'echo', '-e', '\n'
-    } 
-            
-    
     doLast {
+            project.exec {
+                        workingDir "${projectDir}"
+                        commandLine 'sh', './oxygen-64bit-openjdk.sh'
+            }        
+    
+            project.exec {
+                        workingDir "${projectDir}"
+                        commandLine 'echo', '-e', '\n'
+            } 
         String key = System.getenv('SCRIPTING_LICENSE_KEY')
             if (key == null) {
                 throw new TaskExecutionException(it, new Exception("You need a valid Oxygen Scripting license key."))
