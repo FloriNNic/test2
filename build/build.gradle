@@ -8,9 +8,12 @@ task initValidation() {
     project.exec {
             workingDir "${projectDir}"
             commandLine 'sh', './oxygen-64bit-openjdk.sh'
-            
-            commandLine 'echo', '-e', '\n'
     }        
+    
+    project.exec {
+            workingDir "${projectDir}"
+            commandLine 'echo', '-e', '\n'
+    } 
             
     
     doLast {
@@ -18,10 +21,10 @@ task initValidation() {
             if (key == null) {
                 throw new TaskExecutionException(it, new Exception("You need a valid Oxygen Scripting license key."))
             } else {
-                new File("${projectDir}/extracted/oxygen/scriptinglicensekey.txt").write(key.replaceAll("  ", "\n"))
+                new File("${projectDir}/oxygen/scriptinglicensekey.txt").write(key.replaceAll("  ", "\n"))
             }
         project.exec {
-            workingDir "${projectDir}/extracted/oxygen/scripts"
+            workingDir "${projectDir}/oxygen/scripts"
             commandLine 'chmod', '700', 'validate.sh'
         }
     }
