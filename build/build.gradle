@@ -8,7 +8,8 @@ task initValidation() {
     project.exec {
             workingDir "${projectDir}"
             commandLine 'sh', './oxygen-64bit-openjdk.sh'
-            commandLine 'echo -e "\n"'
+            
+            commandLine 'echo', '-e', '\n'
     }        
             
     
